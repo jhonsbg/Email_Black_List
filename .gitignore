@@ -1,0 +1,36 @@
+.coverage
+*.coverage
+.pytest_cache
+*.pytest_cache
+
+# archivos de configuración
+instance/
+*.pyc
+*.pyo
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.db
+
+# archivos de registro
+*.log
+*.swp
+
+# archivos y directorios de caché
+*.pyc
+*.pyo
+*.egg-info/
+__pycache__/
+.cache/
+.pytest_cache/
+celerybeat-schedule
+celerybeat.pid
+celeryd.pid
+
+# directorios de entornos virtuales
+venv/
+env/
+ENV/
