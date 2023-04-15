@@ -49,7 +49,6 @@ class AccessToken(Resource):
         else:
             return('Clave erronea'), 500
         
-
 class ServiceHealth(Resource):
 
     def get(self):
