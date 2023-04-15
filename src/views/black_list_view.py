@@ -1,6 +1,7 @@
 from flask import request
 from flask_restful import Resource
 from datetime import datetime
+from flask_jwt_extended import jwt_required, create_access_token
 
 from models import BlackListModel, BlackListSchema
 from db import db
@@ -8,7 +9,8 @@ from db import db
 black_list_schema = BlackListSchema()
 
 class EmailSave(Resource):
-
+    
+    @jwt_required()
     def post(self):
         new_email = BlackListModel(
             email = request.json["email"],
@@ -28,6 +30,7 @@ class EmailSave(Resource):
 
 class EmailSearch(Resource):
 
+    @jwt_required()
     def get(self, email):
         email_search = BlackListModel.find_email(email)
         if email_search is None:
@@ -35,3 +38,14 @@ class EmailSearch(Resource):
         else:
             message = black_list_schema.dump(email_search)
             return {"Status": True, "Blocked reason": message["reason"]}, 200
+        
+class AccessToken(Resource):
+
+    def post(self):
+        access_token = create_access_token('secreto')
+        return {"Token": access_token}, 200
+
+class ServiceHealth(Resource):
+
+    def get(self):
+        return ("pong")
