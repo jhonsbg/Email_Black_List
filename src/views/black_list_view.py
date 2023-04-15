@@ -42,8 +42,13 @@ class EmailSearch(Resource):
 class AccessToken(Resource):
 
     def post(self):
-        access_token = create_access_token('secreto')
-        return {"Token": access_token}, 200
+        password = request.json["clave"]
+        if password == 'devops':
+            access_token = create_access_token(password)
+            return {'Token': access_token}, 200
+        else:
+            return('Clave erronea'), 500
+        
 
 class ServiceHealth(Resource):
 
